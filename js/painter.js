@@ -18,7 +18,6 @@ class Painter {
 
     this.pencilSelector = pencilSelector
 
-    this.color = '#555555';
     this.x = null;
     this.y = null;
 
@@ -76,7 +75,7 @@ class Painter {
     this.setCanvasStyle();
 
     // init pencil setting.
-    this.penSize = 7;
+    this.penSize = 3;
     this.penColor = '#000000';
     this.penOpacity = 1;
 
