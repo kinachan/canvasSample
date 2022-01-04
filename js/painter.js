@@ -168,6 +168,9 @@ class Painter {
     });
   }
 
+  /**
+   * show preview
+   */
   preview = () => {
     this.previewArea.src = this.element.toDataURL();
 
