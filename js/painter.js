@@ -1,6 +1,6 @@
 
 
-class Drawer {
+class Painter {
   
   constructor(selectorId, width, height, pencilSelector = {
     colorPencil: '#pencilColor',
@@ -36,7 +36,7 @@ class Drawer {
     this.previewArea = document.querySelector(this.pencilSelector.previewArea);
 
     if (this.element == null) {
-      throw Error('[drawer.js] Selector is not found. Please specify the id.');
+      throw this.error('Selector is not found. Please specify the id.');
     }
 
     if (this.element.tagName !== 'CANVAS') {
@@ -184,35 +184,12 @@ class Drawer {
   }
 
   /**
-   * Convert the size type.
-   * @param {*} size 
-   */
-  convertTypeOfSize = (size) => {
-    if (typeof size === 'string') {
-      return size;
-    } else if (typeof size === 'number') {
-      return `${size}px`;
-    }
-    throw new this.error(`size is wrong type.`);
-  }
-
-  /**
    * Throw a common error message.
    * @param {*} message 
    */
   error = (message) => {
-    const error = new Error(`[drawer.js] ${message}`);
+    const error = new Error(`[painter.js] ${message}`);
     return error;
-  }
-
-  /**
-   * logging process
-   * @param {*} coordinate 
-   * @param {*} eventName 
-   */
-  log = (coordinate, eventName) => {
-    const {x, y} = coordinate;
-    console.log(`[drawer.js] ${eventName} x: ${x}, y: ${y}`);
   }
 
   /**
@@ -274,4 +251,4 @@ class Drawer {
   }
 }
 
-const drawer = new Drawer('canvasArea', 564, 407);
+const painter = new Painter('canvasArea', 450, 407);
