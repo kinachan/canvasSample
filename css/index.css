@@ -1,0 +1,19 @@
+
+.custom-container {
+  margin-top: 16px;
+  
+}
+
+.with-color > input {
+  max-width: 70%;
+}
+.with-color > .color-palette {
+  padding-left: 40px;
+  padding-top: 40px;
+  display: inline-flex;
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 2%);
+}
+
+.half {
+  width: 50%;
+}
