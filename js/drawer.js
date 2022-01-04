@@ -61,7 +61,7 @@ class Drawer {
     }
 
     if (this.previewArea != null) {
-      this.previewArea.src = '../image/no-preview.jpg';
+      this.previewArea.src = './image/no-preview.jpg';
       this.previewArea.width = this.width;
       this.previewArea.height = this.height;
     }
