@@ -43,6 +43,9 @@ class Drawer {
       throw this.error(`${this.selectorId} is not canvas`);
     }
 
+    this.element.width = this.width;
+    this.element.height = this.height;
+
     this.element.addEventListener('mousemove', this.onMouseMove);
     this.element.addEventListener('mousedown', this.onMouseDown);
     this.element.addEventListener('mouseout', this.drawFinish);
@@ -134,7 +137,7 @@ class Drawer {
 
     this.context.beginPath();
     this.context.fillStyle = "#f5f5f5";
-    this.context.fillRect(0, 0, 700, 400);
+    this.context.fillRect(0, 0, this.width, this.height);
   }
 
 
@@ -146,18 +149,6 @@ class Drawer {
 
 
   download = () => {
-    // const dataUrl = this.element.toDataURL();
-    // const decodeData = (dataUrl.replace(/^.*,/, ''));
-    // const buffer = new Uint8Array(decodeData.length);
-
-    // for (let i = 0; i < decodeData.length; i++) {
-    //   buffer[i] = decodeData.charCodeAt(i);
-    // }
-
-    // const blob = new Blob([buffer.buffer], {
-    //   type: 'image/png',
-    // });
-
     this.element.toBlob((blob) => {
       const url = URL.createObjectURL(blob);
       const aTag = document.createElement('a');
@@ -283,4 +274,4 @@ class Drawer {
   }
 }
 
-const drawer = new Drawer('canvasArea', 700, 400);
+const drawer = new Drawer('canvasArea', 564, 407);
