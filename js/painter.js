@@ -140,7 +140,9 @@ class Painter {
     this.context.fillRect(0, 0, this.width, this.height);
   }
 
-
+  /**
+   * clear canvas
+   */
   clearCanvas = () => {
     this.context.clearRect(0, 0, this.element.width, this.element.height);
 
@@ -148,6 +150,9 @@ class Painter {
   }
 
 
+  /**
+   * download image.
+   */
   download = () => {
     this.element.toBlob((blob) => {
       const url = URL.createObjectURL(blob);
