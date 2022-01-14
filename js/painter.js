@@ -46,9 +46,16 @@ class Painter {
     this.element.height = this.height;
 
     this.element.addEventListener('mousemove', this.onMouseMove);
+    this.element.addEventListener('touchmove', this.onTouchmove);
+
     this.element.addEventListener('mousedown', this.onMouseDown);
+    this.element.addEventListener('touchstart', this.onTouchmove);
+    
     this.element.addEventListener('mouseout', this.drawFinish);
+    this.element.addEventListener('pointerout', this.drawFinish);
+    
     this.element.addEventListener('mouseup', this.drawFinish);
+    this.element.addEventListener('touchend', this.drawFinish);
 
     if (this.clearButton != null) {
       this.clearButton.addEventListener('click', this.clearCanvas);
@@ -178,21 +185,35 @@ class Painter {
   }
 
   /**
+   * smartphone check
+   * @param {Event} event
+   */
+  isSmartPhone = (event) => {
+    const type = event.type.toLowerCase();
+    return type === 'touchmove' || type === 'touchstart' || event.type === 'touchend'
+  }
+
+  /**
    * Calculate the coordinates from the event.
-   * @param {*} event 
+   * @param {Event} event 
    */
   calcCoordinate = (event) => {
     const rect = event.target.getBoundingClientRect();
 
-    const x = ~~(event.clientX - rect.left);
-    const y = ~~(event.clientY - rect.top);
+    const isSmartPhone = this.isSmartPhone(event);
+
+    const clientX = isSmartPhone ? event.touches[0].clientX : event.clientX;
+    const clientY = isSmartPhone ? event.touches[0].clientY : event.clientY;
+
+    const x = ~~(clientX - rect.left);
+    const y = ~~(clientY - rect.top);
 
     return {x, y};
   }
 
   /**
    * Throw a common error message.
-   * @param {*} message 
+   * @param {string} message 
    */
   error = (message) => {
     const error = new Error(`[painter.js] ${message}`);
@@ -201,7 +222,7 @@ class Painter {
 
   /**
    * mouse down event
-   * @param {*} event 
+   * @param {MouseEvent} event 
    */
   onMouseDown = (event) => {
     if (event.button !== 0) {
@@ -213,12 +234,21 @@ class Painter {
 
   /**
    * mouse move event
-   * @param {*} event 
+   * @param {MouseEvent} event
    */
   onMouseMove = (event) => {
     if (event.buttons !== 1) {
       return;
     }
+    const coordinate = this.calcCoordinate(event);
+    this.draw(coordinate);
+  }
+
+  /**
+   * 
+   * @param {TouchEvent} event 
+   */
+  onTouchmove = (event) => {
     const coordinate = this.calcCoordinate(event);
     this.draw(coordinate);
   }

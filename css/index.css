@@ -17,3 +17,7 @@
 .half {
   width: 50%;
 }
+
+#canvasArea {
+  touch-action: none;
+}
