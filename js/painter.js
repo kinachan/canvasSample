@@ -11,6 +11,7 @@ class Painter {
     downloadButton: '#downloadButton',
     previewButton: '#previewButton',
     previewArea: '#preview',
+    copyURLButton: '#copyURLButton',
   }) {
     this.selectorId = selectorId;
     this.width = width;
@@ -33,6 +34,7 @@ class Painter {
     this.downloadButton = document.querySelector(this.pencilSelector.downloadButton);
     this.previewButton = document.querySelector(this.pencilSelector.previewButton);
     this.previewArea = document.querySelector(this.pencilSelector.previewArea);
+    this.copyURLButton = document.querySelector(this.pencilSelector.copyURLButton);
 
     if (this.element == null) {
       throw this.error('Selector is not found. Please specify the id.');
@@ -60,6 +62,10 @@ class Painter {
 
     if (this.previewButton != null) {
       this.previewButton.addEventListener('click', this.preview);
+    }
+
+    if (this.copyURLButton != null) {
+      this.copyURLButton.addEventListener('click', this.copyURL)
     }
 
     if (this.previewArea != null) {
@@ -175,6 +181,15 @@ class Painter {
 
     this.previewArea.width = this.width;
     this.previewArea.height = this.height;
+  }
+
+  copyURL = () => {
+    const source = this.element.toDataURL();
+    navigator.clipboard.writeText(source).then(() => {
+      alert('コピーしました。画像を共有できます。');
+    }).catch(() => {
+      alert('コピーに失敗しました。ブラウザの設定を見直してみてください。');
+    });
   }
 
   /**
